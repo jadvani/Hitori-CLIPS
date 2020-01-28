@@ -245,6 +245,24 @@
   (modify ?h1 (estado eliminado))
 )
 
+(defrule square-between-a-pair-row
+  (celda (fila ?f) (columna ?c1) (valor ?v1))
+  (celda (fila ?f) (columna ?c3) (valor ?v1))
+  ?h1<-(celda (fila ?f) (columna ?c2) (valor ?v2) (estado desconocido))
+  (test (and (and (eq (- ?c1 ?c2) 1) (eq (- ?c2 ?c3) 1)) (neq ?v1 ?v2)))
+    =>
+  (modify ?h1 (estado asignado))
+)
+
+(defrule square-between-a-pair-column
+  (celda (fila ?f1) (columna ?c) (valor ?v1))
+  (celda (fila ?f3) (columna ?c) (valor ?v1))
+  ?h1<-(celda (fila ?f2) (columna ?c) (valor ?v2) (estado desconocido))
+  (test (and (and (eq (- ?f1 ?f2) 1) (eq (- ?f2 ?f3) 1)) (neq ?v1 ?v2)))
+    =>
+  (modify ?h1 (estado asignado))
+)
+
 
 
 

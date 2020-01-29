@@ -390,6 +390,109 @@
     =>
   (modify ?h1 (estado asignado))
 )
+
+(defrule avoid-isolated-cell-margin-left-1
+  (declare (salience -7))
+  (celda (fila ?f2) (columna ?c1) (estado asignado))
+  (celda (fila ?f1) (columna ?c1) (estado eliminado))
+  (celda (fila ?f2) (columna ?c2) (estado eliminado))
+  ?h1<-(celda (fila ?f3) (columna ?c1) (estado desconocido))
+  (test (and (and (eq ?c1 1)(eq ?c2 2)) (and (eq (- ?f3 ?f2) 1) (eq (- ?f2 ?f1) 1))))
+    =>
+  (modify ?h1 (estado asignado))
+)
+
+(defrule avoid-isolated-cell-margin-left-2
+  (declare (salience -7))
+  (celda (fila ?f2) (columna ?c1) (estado asignado))
+  (celda (fila ?f3) (columna ?c1) (estado eliminado))
+  (celda (fila ?f2) (columna ?c2) (estado eliminado))
+  ?h1<-(celda (fila ?f1) (columna ?c1) (estado desconocido))
+  (test (and (and (eq ?c1 1)(eq ?c2 2)) (and (eq (- ?f3 ?f2) 1) (eq (- ?f2 ?f1) 1))))
+    =>
+  (modify ?h1 (estado asignado))
+)
+
+(defrule avoid-isolated-cell-margin-left-3
+  (declare (salience -7))
+  (celda (fila ?f2) (columna ?c1) (estado asignado))
+  (celda (fila ?f1) (columna ?c1) (estado eliminado))
+  (celda (fila ?f3) (columna ?c1) (estado eliminado))
+  ?h1<-(celda (fila ?f2) (columna ?c2) (estado desconocido))
+  (test (and (and (eq ?c1 1)(eq ?c2 2)) (and (eq (- ?f3 ?f2) 1) (eq (- ?f2 ?f1) 1))))
+    =>
+  (modify ?h1 (estado asignado))
+)
+
+(defrule avoid-isolated-cell-margin-down-1
+  (declare (salience -7))
+  (celda (fila ?f1) (columna ?c2) (estado eliminado))
+  (celda (fila ?f2) (columna ?c1) (estado eliminado))
+  (celda (fila ?f2) (columna ?c2) (estado asignado))
+  ?h1<-(celda (fila ?f2) (columna ?c3) (estado desconocido))
+  (test (and (and (eq ?f1 8)(eq ?f2 9)) (and (eq (- ?c3 ?c2) 1) (eq (- ?c2 ?c1) 1))))
+    =>
+  (modify ?h1 (estado asignado))
+)
+
+(defrule avoid-isolated-cell-margin-down-2
+  (declare (salience -7))
+  (celda (fila ?f1) (columna ?c2) (estado eliminado))
+  (celda (fila ?f2) (columna ?c3) (estado eliminado))
+  (celda (fila ?f2) (columna ?c2) (estado asignado))
+  ?h1<-(celda (fila ?f2) (columna ?c1) (estado desconocido))
+  (test (and (and (eq ?f1 8)(eq ?f2 9)) (and (eq (- ?c3 ?c2) 1) (eq (- ?c2 ?c1) 1))))
+    =>
+  (modify ?h1 (estado asignado))
+)
+
+(defrule avoid-isolated-cell-margin-down-3
+  (declare (salience -7))
+  (celda (fila ?f2) (columna ?c1) (estado eliminado))
+  (celda (fila ?f2) (columna ?c3) (estado eliminado))
+  (celda (fila ?f2) (columna ?c2) (estado asignado))
+  ?h1<-(celda (fila ?f1) (columna ?c2) (estado desconocido))
+  (test (and (and (eq ?f1 8)(eq ?f2 9)) (and (eq (- ?c3 ?c2) 1) (eq (- ?c2 ?c1) 1))))
+    =>
+  (modify ?h1 (estado asignado))
+)
+
+(defrule avoid-isolated-cell-margin-right-1
+  (declare (salience -7))
+  (celda (fila ?f1) (columna ?c2) (estado eliminado))
+  (celda (fila ?f2) (columna ?c1) (estado eliminado))
+  (celda (fila ?f2) (columna ?c2) (estado asignado))
+  ?h1<-(celda (fila ?f3) (columna ?c2) (estado desconocido))
+  (test (and (and (eq ?c1 8)(eq ?c2 9)) (and (eq (- ?f3 ?f2) 1) (eq (- ?f2 ?f1) 1))))
+    =>
+  (modify ?h1 (estado asignado))
+)
+
+(defrule avoid-isolated-cell-margin-right-2
+  (declare (salience -7))
+  (celda (fila ?f3) (columna ?c2) (estado eliminado))
+  (celda (fila ?f2) (columna ?c1) (estado eliminado))
+  (celda (fila ?f2) (columna ?c2) (estado asignado))
+  ?h1<-(celda (fila ?f1) (columna ?c2) (estado desconocido))
+  (test (and (and (eq ?c1 8)(eq ?c2 9)) (and (eq (- ?f3 ?f2) 1) (eq (- ?f2 ?f1) 1))))
+    =>
+  (modify ?h1 (estado asignado))
+)
+
+(defrule avoid-isolated-cell-margin-right-3
+  (declare (salience -7))
+  (celda (fila ?f3) (columna ?c2) (estado eliminado))
+  (celda (fila ?f1) (columna ?c2) (estado eliminado))
+  (celda (fila ?f2) (columna ?c2) (estado asignado))
+  ?h1<-(celda (fila ?f2) (columna ?c1) (estado desconocido))
+  (test (and (and (eq ?c1 8)(eq ?c2 9)) (and (eq (- ?f3 ?f2) 1) (eq (- ?f2 ?f1) 1))))
+    =>
+  (modify ?h1 (estado asignado))
+)
+
+
+
+
 ;;;(defrule unassigned-unique-value-row-column
 ;;;  (declare (salience -7))
 ;;;  (celda (fila ?f1) (columna ?c1) (valor ?v1) (estado asignado))

@@ -491,6 +491,40 @@
 )
 
 
+(defrule avoid-isolated-cell-margin-up-1
+  (declare (salience -7))
+  (celda (fila ?f2) (columna ?c2) (estado eliminado))
+  (celda (fila ?f1) (columna ?c3) (estado eliminado))
+  (celda (fila ?f1) (columna ?c2) (estado asignado))
+  ?h1<-(celda (fila ?f1) (columna ?c1) (estado desconocido))
+  (test (and (and (eq ?f1 1)(eq ?f2 2)) (and (eq (- ?c3 ?c2) 1) (eq (- ?c2 ?c1) 1))))
+    =>
+  (modify ?h1 (estado asignado))
+)
+
+(defrule avoid-isolated-cell-margin-up-2
+  (declare (salience -7))
+  (celda (fila ?f2) (columna ?c2) (estado eliminado))
+  (celda (fila ?f1) (columna ?c1) (estado eliminado))
+  (celda (fila ?f1) (columna ?c2) (estado asignado))
+  ?h1<-(celda (fila ?f1) (columna ?c3) (estado desconocido))
+  (test (and (and (eq ?f1 1)(eq ?f2 2)) (and (eq (- ?c3 ?c2) 1) (eq (- ?c2 ?c1) 1))))
+    =>
+  (modify ?h1 (estado asignado))
+)
+
+(defrule avoid-isolated-cell-margin-up-3
+  (declare (salience -7))
+  (celda (fila ?f3) (columna ?c3) (estado eliminado))
+  (celda (fila ?f1) (columna ?c1) (estado eliminado))
+  (celda (fila ?f1) (columna ?c2) (estado asignado))
+  ?h1<-(celda (fila ?f2) (columna ?c2) (estado desconocido))
+  (test (and (and (eq ?f1 1)(eq ?f2 2)) (and (eq (- ?c3 ?c2) 1) (eq (- ?c2 ?c1) 1))))
+    =>
+  (modify ?h1 (estado asignado))
+)
+
+
 
 
 ;;;(defrule unassigned-unique-value-row-column

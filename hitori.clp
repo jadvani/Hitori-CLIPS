@@ -263,7 +263,15 @@
   (modify ?h1 (estado asignado))
 )
 
-
+(defrule unassigned-unique-value-row-column
+  (declare (salience -7))
+  (celda (fila ?f1) (columna ?c1) (valor ?v1) (estado asignado))
+  (celda (fila ?f2) (columna ?c2) (valor ?v2) (estado asignado))
+  ?h1<-(celda (fila ?f1) (columna ?c2) (valor ?v3) (estado desconocido))
+  (test (and (and (neq ?f1 ?f2) (neq ?c1 ?c2)) (and (neq ?v1 ?v3) (neq ?v2 ?v3))))
+    =>
+  (modify ?h1 (estado asignado))
+)
 
 
 ;;;============================================================================

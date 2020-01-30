@@ -524,14 +524,38 @@
   (modify ?h1 (estado asignado))
 )
 
+(defrule assign-unique-values-in-row-column
+(declare (salience 5))
+?h <- (celda (fila ?f2) (columna ?c2) (valor ?v) (estado desconocido))
+(not (celda (fila ?f2) (columna ?c1&~?c2) (valor ?v) (estado ?e&~eliminado)))
+(not (celda (fila ?f1&~?f2) (columna ?c2) (valor ?v) (estado ?e&~eliminado)))
+=>
+(modify ?h (estado asignado)))
 
-
+(defrule two-pairs-common-number-between-columns
+  (celda (fila ?f1) (columna ?c1) (valor ?v1))
+  (celda (fila ?f1) (columna ?c2) (valor ?v2))
+  (celda (fila ?f2) (columna ?c1) (valor ?v1))
+  (celda (fila ?f2) (columna ?c2) (valor ?v2))
+  ?h1 <- (celda (fila ?f3) (columna ?c1) (valor ?v1) (estado desconocido))
+  (test (and (eq (abs(- ?c1 ?c2)) 1) (and (> ?f3 ?f2) (> ?f2 ?f1))))
+    =>
+  (modify ?h1 (estado asignado)))
+(defrule two-pairs-common-number-between-rows
+  (celda (fila ?f1) (columna ?c1) (valor ?v1))
+  (celda (fila ?f2) (columna ?c1) (valor ?v2))
+  (celda (fila ?f1) (columna ?c2) (valor ?v1))
+  (celda (fila ?f2) (columna ?c2) (valor ?v2))
+  ?h1 <- (celda (fila ?f1) (columna ?c3) (valor ?v1) (estado desconocido))
+  (test (and (eq (abs(- ?f1 ?f2)) 1) (and (> ?c3 ?c2) (> ?c2 ?c1))))
+    =>
+  (modify ?h1 (estado asignado)))
 
 ;;;(defrule unassigned-unique-value-row-column
 ;;;  (declare (salience -7))
 ;;;  (celda (fila ?f1) (columna ?c1) (valor ?v1) (estado asignado))
-;;;  (celda (fila ?f2) (columna ?c2) (valor ?v2) (estado asignado))
-;;;  ?h1<-(celda (fila ?f1) (columna ?c2) (valor ?v3) (estado desconocido))
+;;;  not(celda (fila ?f2) (columna ?c2) (valor ?v2) (estado asignado))
+;;;  ?h1<-(celda (fila ?f1) (columna ?c2) (valor ?v3~?v2) (estado desconocido))
 ;;;  (test (and (and (neq ?f1 ?f2) (neq ?c1 ?c2)) (and (neq ?v1 ?v3) (neq ?v2 ?v3))))
 ;;;    =>
 ;;;  (modify ?h1 (estado asignado))

@@ -555,20 +555,27 @@
 
 (defrule value-already-assigned-column
   (declare (salience 20))
-(celda (fila ?f1) (columna ?c) (valor ?v) (estado asignado))
-?h<-(celda (fila ?f2) (columna ?c) (valor ?v) (estado desconocido))
-(test (neq ?f1 ?f2))
-=>
-   (modify ?h (estado eliminado)))   
+  (celda (fila ?f1) (columna ?c) (valor ?v) (estado asignado))
+  ?h<-(celda (fila ?f2) (columna ?c) (valor ?v) (estado desconocido))
+  (test (neq ?f1 ?f2))
+    =>
+  (modify ?h (estado eliminado)))   
 
 (defrule value-already-assigned-row
   (declare (salience 20))
-(celda (fila ?f) (columna ?c1) (valor ?v) (estado asignado))
-?h<-(celda (fila ?f) (columna ?c2) (valor ?v) (estado desconocido))
-(test (neq ?c1 ?c2))
-=>
-   (modify ?h (estado eliminado)))   
+  (celda (fila ?f) (columna ?c1) (valor ?v) (estado asignado))
+  ?h<-(celda (fila ?f) (columna ?c2) (valor ?v) (estado desconocido))
+  (test (neq ?c1 ?c2))
+    =>
+  (modify ?h (estado eliminado)))   
 
+;;;(defrule assign-third-from-deleted-row
+;;;(celda (fila ?f) (columna ?c1) (valor ?v) (estado eliminado))
+;;;(celda (fila ?f) (columna ?c2) (valor ?v) (estado eliminado))
+;;;  ?h<-(celda (fila ?f) (columna ?c3) (valor ?v) (estado desconocido))
+;;;  (test (and (neq ?c1 ?c2) (neq ?c1 ?c3)))
+;;;    =>
+;;;  (modify ?h (estado asignado)))  
    
 
 ;;;  (defrule pair-and-crossed-pair-between-rows

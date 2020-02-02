@@ -540,7 +540,8 @@
   ?h1 <- (celda (fila ?f3) (columna ?c1) (valor ?v1) (estado desconocido))
   (test (and (eq (abs(- ?c1 ?c2)) 1) (and (> ?f3 ?f2) (> ?f2 ?f1))))
     =>
-  (modify ?h1 (estado asignado)))
+  (modify ?h1 (estado eliminado)))
+  
 (defrule two-pairs-common-number-between-rows
   (celda (fila ?f1) (columna ?c1) (valor ?v1))
   (celda (fila ?f2) (columna ?c1) (valor ?v2))
@@ -548,6 +549,35 @@
   (celda (fila ?f2) (columna ?c2) (valor ?v2))
   ?h1 <- (celda (fila ?f1) (columna ?c3) (valor ?v1) (estado desconocido))
   (test (and (eq (abs(- ?f1 ?f2)) 1) (and (> ?c3 ?c2) (> ?c2 ?c1))))
+    =>
+  (modify ?h1 (estado eliminado)))
+  
+
+(defrule value-already-assigned-column
+  (declare (salience 20))
+(celda (fila ?f1) (columna ?c) (valor ?v) (estado asignado))
+?h<-(celda (fila ?f2) (columna ?c) (valor ?v) (estado desconocido))
+(test (neq ?f1 ?f2))
+=>
+   (modify ?h (estado eliminado)))   
+
+(defrule value-already-assigned-row
+  (declare (salience 20))
+(celda (fila ?f) (columna ?c1) (valor ?v) (estado asignado))
+?h<-(celda (fila ?f) (columna ?c2) (valor ?v) (estado desconocido))
+(test (neq ?c1 ?c2))
+=>
+   (modify ?h (estado eliminado)))   
+
+
+(defrule pair-and-crossed-pair-between-rows
+  (declare (salience -7))
+  (celda (fila ?f1) (columna ?c1) (valor ?v1))
+  (celda (fila ?f2) (columna ?c1) (valor ?v1))
+  (celda (fila ?f1) (columna ?c2) (valor ?v2))
+  (celda (fila ?f3) (columna ?c2) (valor ?v2))
+  ?h1 <- (celda (fila ?f3) (columna ?c1|?c2) (estado desconocido))
+  (test (and (and (neq ?f1 ?f3) (eq (abs(- ?f3 ?f2)) 1)) (and (eq (- ?c2 ?c1) 1) (neq ?f1 ?f2))))
     =>
   (modify ?h1 (estado asignado)))
 

@@ -316,7 +316,7 @@
   (celda (fila ?f1) (columna ?c1) (estado asignado))
   (celda (fila ?f1) (columna ?c2) (estado eliminado))
   ?h1<-(celda (fila ?f2) (columna ?c1) (estado desconocido))
-  (test (and (and (eq ?c1 1)(eq ?c2 2)) (and (eq ?f1 1) (eq ?f2 2))))
+  (test (and (and (= ?c1 1)(= ?c2 2)) (and (= ?f1 1) (= ?f2 2))))
     =>
   (modify ?h1 (estado asignado))
 )
@@ -326,7 +326,7 @@
   (celda (fila ?f1) (columna ?c1) (estado asignado))
   (celda (fila ?f2) (columna ?c1) (estado eliminado))
   ?h1<-(celda (fila ?f1) (columna ?c2) (estado desconocido))
-  (test (and (and (eq ?c1 1)(eq ?c2 2)) (and (eq ?f1 1) (eq ?f2 2))))
+  (test (and (and (= ?c1 1)(= ?c2 2)) (and (= ?f1 1) (= ?f2 2))))
     =>
   (modify ?h1 (estado asignado))
 )
@@ -336,7 +336,7 @@
   (celda (fila ?f2) (columna ?c1) (estado asignado))
   (celda (fila ?f1) (columna ?c1) (estado eliminado))
   ?h1<-(celda (fila ?f2) (columna ?c2) (estado desconocido))
-  (test (and (and (eq ?c1 1)(eq ?c2 2)) (and (eq ?f1 8) (eq ?f2 9))))
+  (test (and (and (= ?c1 1)(= ?c2 2)) (and (= ?f1 8) (= ?f2 9))))
     =>
   (modify ?h1 (estado asignado))
 )
@@ -346,7 +346,7 @@
   (celda (fila ?f2) (columna ?c1) (estado asignado))
   (celda (fila ?f2) (columna ?c2) (estado eliminado))
   ?h1<-(celda (fila ?f1) (columna ?c1) (estado desconocido))
-  (test (and (and (eq ?c1 1)(eq ?c2 2)) (and (eq ?f1 8) (eq ?f2 9))))
+  (test (and (and (= ?c1 1)(= ?c2 2)) (and (= ?f1 8) (= ?f2 9))))
     =>
   (modify ?h1 (estado asignado))
 )
@@ -356,7 +356,7 @@
   (celda (fila ?f2) (columna ?c2) (estado asignado))
   (celda (fila ?f2) (columna ?c1) (estado eliminado))
   ?h1<-(celda (fila ?f1) (columna ?c2) (estado desconocido))
-  (test (and (and (eq ?c1 8)(eq ?c2 9)) (and (eq ?f1 8) (eq ?f2 9))))
+  (test (and (and (= ?c1 8)(= ?c2 9)) (and (= ?f1 8) (= ?f2 9))))
     =>
   (modify ?h1 (estado asignado))
 )
@@ -366,7 +366,7 @@
   (celda (fila ?f2) (columna ?c2) (estado asignado))
   (celda (fila ?f1) (columna ?c2) (estado eliminado))
   ?h1<-(celda (fila ?f2) (columna ?c1) (estado desconocido))
-  (test (and (and (eq ?c1 8)(eq ?c2 9)) (and (eq ?f1 8) (eq ?f2 9))))
+  (test (and (and (= ?c1 8)(= ?c2 9)) (and (= ?f1 8) (= ?f2 9))))
     =>
   (modify ?h1 (estado asignado))
 )
@@ -376,7 +376,7 @@
   (celda (fila ?f1) (columna ?c2) (estado asignado))
   (celda (fila ?f1) (columna ?c1) (estado eliminado))
   ?h1<-(celda (fila ?f2) (columna ?c2) (estado desconocido))
-  (test (and (and (eq ?c1 8)(eq ?c2 9)) (and (eq ?f1 1) (eq ?f2 2))))
+  (test (and (and (= ?c1 8)(= ?c2 9)) (and (= ?f1 1) (= ?f2 2))))
     =>
   (modify ?h1 (estado asignado))
 )
@@ -386,7 +386,7 @@
   (celda (fila ?f1) (columna ?c2) (estado asignado))
   (celda (fila ?f2) (columna ?c2) (estado eliminado))
   ?h1<-(celda (fila ?f1) (columna ?c1) (estado desconocido))
-  (test (and (and (eq ?c1 8)(eq ?c2 9)) (and (eq ?f1 1) (eq ?f2 2))))
+  (test (and (and (= ?c1 8)(= ?c2 9)) (and (= ?f1 1) (= ?f2 2))))
     =>
   (modify ?h1 (estado asignado))
 )
@@ -397,7 +397,7 @@
   (celda (fila ?f1) (columna ?c1) (estado eliminado))
   (celda (fila ?f2) (columna ?c2) (estado eliminado))
   ?h1<-(celda (fila ?f3) (columna ?c1) (estado desconocido))
-  (test (and (and (eq ?c1 1)(eq ?c2 2)) (and (eq (- ?f2 ?f3) 1) (eq (- ?f1 ?f2) 1))))
+  (test (and (and (= ?c1 1)(= ?c2 2)) (and (eq (- ?f2 ?f3) 1) (eq (- ?f1 ?f2) 1))))
     =>
   (modify ?h1 (estado asignado))
 )
@@ -408,7 +408,7 @@
   (celda (fila ?f3) (columna ?c1) (estado eliminado))
   (celda (fila ?f2) (columna ?c2) (estado eliminado))
   ?h1<-(celda (fila ?f1) (columna ?c1) (estado desconocido))
-  (test (and (and (eq ?c1 1)(eq ?c2 2)) (and (eq (- ?f2 ?f3) 1) (eq (- ?f1 ?f2) 1))))
+  (test (and (and (= ?c1 1)(= ?c2 2)) (and (eq (- ?f2 ?f3) 1) (eq (- ?f1 ?f2) 1))))
     =>
   (modify ?h1 (estado asignado))
 )
@@ -419,7 +419,7 @@
   (celda (fila ?f1) (columna ?c1) (estado eliminado))
   (celda (fila ?f3) (columna ?c1) (estado eliminado))
   ?h1<-(celda (fila ?f2) (columna ?c2) (estado desconocido))
-  (test (and (and (eq ?c1 1)(eq ?c2 2)) (and (eq (- ?f2 ?f3) 1) (eq (- ?f1 ?f2) 1))))
+  (test (and (and (= ?c1 1)(= ?c2 2)) (and (eq (- ?f2 ?f3) 1) (eq (- ?f1 ?f2) 1))))
     =>
   (modify ?h1 (estado asignado))
 )
@@ -430,7 +430,7 @@
   (celda (fila ?f2) (columna ?c1) (estado eliminado))
   (celda (fila ?f2) (columna ?c2) (estado asignado))
   ?h1<-(celda (fila ?f2) (columna ?c3) (estado desconocido))
-  (test (and (and (eq ?f1 8)(eq ?f2 9)) (and (eq (- ?c2 ?c3) 1) (eq (- ?c1 ?c2) 1))))
+  (test (and (and (= ?f1 8)(= ?f2 9)) (and (eq (- ?c2 ?c3) 1) (eq (- ?c1 ?c2) 1))))
     =>
   (modify ?h1 (estado asignado))
 )
@@ -441,7 +441,7 @@
   (celda (fila ?f2) (columna ?c3) (estado eliminado))
   (celda (fila ?f2) (columna ?c2) (estado asignado))
   ?h1<-(celda (fila ?f2) (columna ?c1) (estado desconocido))
-  (test (and (and (eq ?f1 8)(eq ?f2 9)) (and (eq (- ?c2 ?c3) 1) (eq (- ?c1 ?c2) 1))))
+  (test (and (and (= ?f1 8)(= ?f2 9)) (and (eq (- ?c2 ?c3) 1) (eq (- ?c1 ?c2) 1))))
     =>
   (modify ?h1 (estado asignado))
 )
@@ -452,7 +452,7 @@
   (celda (fila ?f2) (columna ?c3) (estado eliminado))
   (celda (fila ?f2) (columna ?c2) (estado asignado))
   ?h1<-(celda (fila ?f1) (columna ?c2) (estado desconocido))
-  (test (and (and (eq ?f1 8)(eq ?f2 9)) (and (eq (- ?c2 ?c3) 1) (eq (- ?c1 ?c2) 1))))
+  (test (and (and (= ?f1 8)(= ?f2 9)) (and (eq (- ?c2 ?c3) 1) (eq (- ?c1 ?c2) 1))))
     =>
   (modify ?h1 (estado asignado))
 )
@@ -463,7 +463,7 @@
   (celda (fila ?f2) (columna ?c1) (estado eliminado))
   (celda (fila ?f2) (columna ?c2) (estado asignado))
   ?h1<-(celda (fila ?f3) (columna ?c2) (estado desconocido))
-  (test (and (and (eq ?c1 8)(eq ?c2 9)) (and (eq (- ?f2 ?f3) 1) (eq (- ?f1 ?f2) 1))))
+  (test (and (and (= ?c1 8)(= ?c2 9)) (and (eq (- ?f2 ?f3) 1) (eq (- ?f1 ?f2) 1))))
     =>
   (modify ?h1 (estado asignado))
 )
@@ -474,7 +474,7 @@
   (celda (fila ?f2) (columna ?c1) (estado eliminado))
   (celda (fila ?f2) (columna ?c2) (estado asignado))
   ?h1<-(celda (fila ?f1) (columna ?c2) (estado desconocido))
-  (test (and (and (eq ?c1 8)(eq ?c2 9)) (and (eq (- ?f2 ?f3) 1) (eq (- ?f1 ?f2) 1))))
+  (test (and (and (= ?c1 8)(= ?c2 9)) (and (eq (- ?f2 ?f3) 1) (eq (- ?f1 ?f2) 1))))
     =>
   (modify ?h1 (estado asignado))
 )
@@ -485,7 +485,7 @@
   (celda (fila ?f1) (columna ?c2) (estado eliminado))
   (celda (fila ?f2) (columna ?c2) (estado asignado))
   ?h1<-(celda (fila ?f2) (columna ?c1) (estado desconocido))
-  (test (and (and (eq ?c1 8)(eq ?c2 9)) (and (eq (- ?f2 ?f3) 1) (eq (- ?f1 ?f2) 1))))
+  (test (and (and (= ?c1 8)(= ?c2 9)) (and (eq (- ?f2 ?f3) 1) (eq (- ?f1 ?f2) 1))))
     =>
   (modify ?h1 (estado asignado))
 )
@@ -497,7 +497,7 @@
   (celda (fila ?f1) (columna ?c3) (estado eliminado))
   (celda (fila ?f1) (columna ?c2) (estado asignado))
   ?h1<-(celda (fila ?f1) (columna ?c1) (estado desconocido))
-  (test (and (and (eq ?f1 1)(eq ?f2 2)) (and (eq (- ?c2 ?c3) 1) (eq (- ?c1 ?c2) 1))))
+  (test (and (and (= ?f1 1)(= ?f2 2)) (and (eq (- ?c2 ?c3) 1) (eq (- ?c1 ?c2) 1))))
     =>
   (modify ?h1 (estado asignado))
 )
@@ -508,7 +508,7 @@
   (celda (fila ?f1) (columna ?c1) (estado eliminado))
   (celda (fila ?f1) (columna ?c2) (estado asignado))
   ?h1<-(celda (fila ?f1) (columna ?c3) (estado desconocido))
-  (test (and (and (eq ?f1 1)(eq ?f2 2)) (and (eq (- ?c2 ?c3) 1) (eq (- ?c1 ?c2) 1))))
+  (test (and (and (= ?f1 1)(= ?f2 2)) (and (eq (- ?c2 ?c3) 1) (eq (- ?c1 ?c2) 1))))
     =>
   (modify ?h1 (estado asignado))
 )
@@ -519,7 +519,7 @@
   (celda (fila ?f1) (columna ?c1) (estado eliminado))
   (celda (fila ?f1) (columna ?c2) (estado asignado))
   ?h1<-(celda (fila ?f2) (columna ?c2) (estado desconocido))
-  (test (and (and (eq ?f1 1)(eq ?f2 2)) (and (eq (- ?c2 ?c3) 1) (eq (- ?c1 ?c2) 1))))
+  (test (and (and (= ?f1 1)(= ?f2 2)) (and (eq (- ?c2 ?c3) 1) (eq (- ?c1 ?c2) 1))))
     =>
   (modify ?h1 (estado asignado))
 )
@@ -552,6 +552,16 @@
     =>
   (modify ?h1 (estado eliminado)))
   
+  ;;;;;;;;;;;;;;;;;;;;;Esta regla no está funcionando como debería...  ;;;;;;;;;;;;;;;;;;;;;
+(defrule avoid-diagonal-isolation
+(declare (salience -8))
+?h1<-(celda (fila ?f1) (columna ?c1) (estado desconocido))
+(celda (fila ?f2&~?f1) (columna  ?c2&~?c1) (estado ?e1))
+(forall (celda (fila ?f2) (columna ?c2))
+(test (eq ?e1 eliminado))
+(test (= (abs(- ?f1 ?f2))(abs(- ?c1 ?c2)))))
+  =>
+  (modify ?h1 (estado asignado)))
 
 (defrule value-already-assigned-column
   (declare (salience 20))
@@ -567,7 +577,17 @@
   ?h<-(celda (fila ?f) (columna ?c2) (valor ?v) (estado desconocido))
   (test (neq ?c1 ?c2))
     =>
-  (modify ?h (estado eliminado)))   
+  (modify ?h (estado eliminado)))
+
+;(defrule corner-down-right-with-assigned-value
+;  (declare (salience 20))
+;  (celda (fila ?f2) (columna ?c2) (estado asignado))
+;  (celda (fila ?f1) (columna ?c2) (estado desconocido))
+;  (celda (fila ?f1) (columna ?c2) (estado desconocido))
+;  ?h<-(celda (fila ?f) (columna ?c2) (valor ?v) (estado desconocido))
+;  (test (neq ?c1 ?c2))
+;    =>
+;  (modify ?h (estado eliminado)))   
 
 ;;;(defrule assign-third-from-deleted-row
 ;;;(celda (fila ?f) (columna ?c1) (valor ?v) (estado eliminado))
@@ -578,16 +598,18 @@
 ;;;  (modify ?h (estado asignado)))  
    
 
-;;;  (defrule pair-and-crossed-pair-between-rows
-;;;  (declare (salience 5))
-;;;  (celda (fila ?f1) (columna ?c1) (valor ?v1))
-;;;  (celda (fila ?f2) (columna ?c1) (valor ?v1))
-;;;  (celda (fila ?f1) (columna ?c2) (valor ?v2))
-;;;  (celda (fila ?f3) (columna ?c2) (valor ?v2))
-;;;  ?h1 <- (celda (fila ?f3) (columna ?c1|?c2) (estado desconocido))
-;;;  (test (and (eq (abs(- ?f2 ?f3)) 1) (and (eq (- ?c1 ?c2) 1) (neq ?f1 ?f2))))
-;;;    =>
-;;;  (modify ?h1 (estado asignado)))
+  (defrule pair-and-crossed-pair-between-rows
+  (declare (salience -5))
+  (celda (fila ?f1) (columna ?c1) (valor ?v1))
+  (celda (fila ?f2) (columna ?c1) (valor ?v1) (estado ?e1))
+  (celda (fila ?f1) (columna ?c2) (valor ?v2))
+  (celda (fila ?f3) (columna ?c2) (valor ?v2) (estado ?e2))
+  ?h1 <- (celda (fila ?f3) (columna ?c1) (estado ?e3))
+  (test (and (eq (abs(- ?f2 ?f3)) 1) (and (eq (abs(- ?c1 ?c2)) 1) (neq ?f1 ?f2))))
+  (test (or (eq ?e1 eliminado) (eq ?e2 eliminado)))
+  (test (eq ?e3 desconocido))
+    =>
+  (modify ?h1 (estado asignado)))
 
 ;;;(defrule unassigned-unique-value-row-column
 ;;;  (declare (salience -7))

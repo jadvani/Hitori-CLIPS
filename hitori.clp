@@ -159,46 +159,124 @@
 ;;; celda debe eliminarse o debe mantenerse a partir de reglas que analicen los
 ;;; valores y situaciones de las celdas relacionadas.
 
-(defrule avoid-diagonal-isolation-1
-(declare (salience 7))
-  ?h1<-(celda (fila ?f1) (columna ?c1) (estado desconocido))
-  (forall (celda (fila ?f2&~?f1) (columna ?c2&~?c1) (estado ?e))
-  (test (and (= (- ?f1 ?f2) (- ?c1 ?c2))
-  (= (- ?f2 ?f1) (- ?c2 ?c1))
-  (and (> ?f2 ?f1) (> ?c2 ?c1))
-  (eq ?e eliminado))))
+;(defrule avoid-diagonal-isolation
+;(declare (salience -7))
+;  ?h1<-(celda (fila ?f1) (columna ?c1) (estado desconocido))
+;  (test (and (and (not (and (= ?f1 1) (= ?c1 1))) (not (and (= ?f1 9) (= ?c1 9)))) (and (not (and (= ?f1 1) (= ?c1 9))) (not (and (= ?f1 9) (= ?c1 1))))))
+;  (forall
+;  (and (celda (fila ?f2&~?f1) (columna ?c2&~?c1) (estado ?e)) (test (= (abs(- ?f1 ?f2)) (abs(- ?c1 ?c2))))) 
+;  (test (eq ?e eliminado))
+;  )
+;  =>
+;  (modify ?h1 (estado asignado)))
+;http://www.menneske.no/hitori/methods/eng/methoddc.html
+(defrule double-corner-47th-puzzle
+(declare (salience -7))
+  (celda (fila ?f2) (columna ?c1) (valor ?v))
+  (celda (fila ?f2) (columna ?c2) (valor ?v))
+  ?h<-(celda (fila ?f1) (columna ?c2) (estado desconocido))
+  (test (and (and (= ?f1 8) (= ?f2 9)) (and (= ?c1 8) (= ?c2 9))))
   =>
-  (modify ?h1 (estado asignado)))
+  (modify ?h (estado asignado)))
   
- (defrule avoid-diagonal-isolation-2
-(declare (salience 7))
-  ?h1<-(celda (fila ?f1) (columna ?c1) (estado desconocido))
-  (forall (celda (fila ?f2&~?f1) (columna ?c2&~?c1) (estado ?e))
-  (test (and (= (- ?f2 ?f1) (- ?c2 ?c1))
-  (and (> ?f2 ?f1) (> ?c2 ?c1))
-  (eq ?e eliminado))))
+(defrule double-corner-23rd-puzzle
+(declare (salience -7))
+  (celda (fila ?f1) (columna ?c2) (valor ?v))
+  (celda (fila ?f2) (columna ?c2) (valor ?v))
+  ?h<-(celda (fila ?f2) (columna ?c1) (estado desconocido))
+  (test (and (and (= ?f1 8) (= ?f2 9)) (and (= ?c1 8) (= ?c2 9))))
   =>
-  (modify ?h1 (estado asignado)))
-  
- (defrule avoid-diagonal-isolation-3
-(declare (salience 20))
-  ?h1<-(celda (fila ?f1) (columna ?c1) (estado desconocido))
-  (forall (celda (fila ?f2&~?f1) (columna ?c2&~?c1) (estado ?e))
-  (test (and (= (- ?f2 ?f1) (- ?c1 ?c2))
-  (and (> ?f2 ?f1) (> ?c2 ?c1))
-  (eq ?e eliminado))))
-  =>
-  (modify ?h1 (estado asignado)))
+  (modify ?h (estado asignado)))
 
- (defrule avoid-diagonal-isolation-4 
-(declare (salience 7))
-  ?h1<-(celda (fila ?f1) (columna ?c1) (estado desconocido))
-  (forall (celda (fila ?f2&~?f1) (columna ?c2&~?c1) (estado ?e))
-  (test (and (= (- ?f1 ?f2) (- ?c2 ?c1))
-  (and (> ?f2 ?f1) (> ?c2 ?c1))
-  (eq ?e eliminado))))
+(defrule avoid-isolation-47th-puzzle-solve
+(declare (salience -7))
+  (celda (fila ?f1) (columna ?c3) (estado ?e))
+  (celda (fila ?f2) (columna ?c2) (estado ?e))
+  (celda (fila ?f3) (columna ?c1) (estado ?e))
+  ?h<-(celda (fila ?f4) (columna ?c2) (estado desconocido))
+  (test (and (and (= ?f1 6) (= ?f2 7)) (and (= ?f3 8) (= ?f4 9))))
+  (test (and (and (= ?c1 7) (= ?c2 8)) (= ?c3 9)))
+  (test (eq ?e eliminado))
   =>
-  (modify ?h1 (estado asignado)))
+  (modify ?h (estado asignado)))
+
+
+(defrule avoid-corner-isolation-49th-puzzle
+(declare (salience -7))
+  ?h1<-(celda (fila ?f1) (columna ?c1) (estado desconocido) (valor ?v))
+  ?h2<-(celda (fila ?f2) (columna ?c2) (estado desconocido) (valor ?v))
+  ?h3<-(celda (fila ?f3) (columna ?c3) (estado desconocido) (valor ?v))
+  (test (and (and (and (= ?f1 8) (= ?c1 8)) (and (= ?f2 8) (= ?c2 9))) (and (= ?f3 9) (= ?c3 8))))
+  =>
+  (modify ?h1 (estado eliminado))
+  (modify ?h2 (estado asignado))
+  (modify ?h3 (estado asignado)))
+
+
+(defrule solve-diagonal-48th-puzzle
+(declare (salience -7))
+  ?h<-(celda (fila ?f1) (columna ?c1) (estado desconocido))
+  (celda (fila ?f2) (columna ?c2) (estado eliminado))
+  (celda (fila ?f3) (columna ?c3) (estado eliminado))
+  (test (and (and (and (= ?f1 7) (= ?c1 9)) (and (= ?f2 8) (= ?c2 8))) (and (= ?f3 9) (= ?c3 7))))
+  =>
+  (modify ?h (estado asignado)))
+
+(defrule solve-diagonal-42nd-puzzle
+(declare (salience -7))
+  ?h<-(celda (fila ?f1) (columna ?c1) (estado desconocido))
+  (celda (fila ?f2) (columna ?c2) (estado eliminado))
+  (celda (fila ?f3) (columna ?c3) (estado eliminado))
+  (celda (fila ?f4) (columna ?c4) (estado eliminado))
+  (test (and (and (and (= ?f1 1) (= ?c1 4)) (and (= ?f2 2) (= ?c2 3))) (and (and (= ?f3 3) (= ?c3 2)) (and (= ?f4 4) (= ?c4 1)))))
+  =>
+  (modify ?h (estado asignado)))
+
+(defrule solve-diagonal-45th-puzzle
+(declare (salience -7))
+  (celda (fila ?f1) (columna ?c1) (estado eliminado))
+  ?h<-(celda (fila ?f2) (columna ?c2) (estado desconocido))
+  (celda (fila ?f3) (columna ?c3) (estado eliminado))
+  (celda (fila ?f4) (columna ?c4) (estado eliminado))
+  (test (and (and (and (= ?f1 1) (= ?c1 6)) (and (= ?f2 2) (= ?c2 7))) (and (and (= ?f3 3) (= ?c3 8)) (and (= ?f4 4) (= ?c4 9)))))
+  =>
+  (modify ?h (estado asignado)))
+
+(defrule solve-diagonal-29th-puzzle
+(declare (salience -7))
+  ?h<-(celda (fila ?f1) (columna ?c1) (estado desconocido))
+  (celda (fila ?f2) (columna ?c2) (estado eliminado))
+  (celda (fila ?f3) (columna ?c3) (estado eliminado))
+  (test (and (and (and (= ?f1 9) (= ?c1 3)) (and (= ?f2 8) (= ?c2 2))) (and (= ?f3 7) (= ?c3 1))))
+  =>
+  (modify ?h (estado asignado)))
+  
+(defrule solve-diagonal-30th-puzzle
+(declare (salience -7))
+  ?h<-(celda (fila ?f1) (columna ?c1) (estado desconocido))
+  (celda (fila ?f2) (columna ?c2) (estado eliminado))
+  (celda (fila ?f3) (columna ?c3) (estado eliminado))
+  (test (and (and (and (= ?f1 9) (= ?c1 7)) (and (= ?f2 8) (= ?c2 8))) (and (= ?f3 7) (= ?c3 9))))
+  =>
+  (modify ?h (estado asignado)))
+
+(defrule solve-diagonal-24th-puzzle
+(declare (salience -7))
+  ?h<-(celda (fila ?f1) (columna ?c1) (estado desconocido))
+  (celda (fila ?f2) (columna ?c2) (estado eliminado))
+  (celda (fila ?f3) (columna ?c3) (estado eliminado))
+  (test (and (and (and (= ?f1 1) (= ?c1 3)) (and (= ?f2 2) (= ?c2 2))) (and (= ?f3 3) (= ?c3 1))))
+  =>
+  (modify ?h (estado asignado)))
+  
+(defrule avoid-diagonal-23rd-puzzle
+(declare (salience -7))
+  (celda (fila ?f1) (columna ?c1) (estado eliminado))
+  (celda (fila ?f2) (columna ?c2) (estado eliminado))
+  ?h<-(celda (fila ?f3) (columna ?c3) (estado desconocido))
+  (test (and (and (and (= ?f1 1) (= ?c1 7)) (and (= ?f2 2) (= ?c2 8))) (and (= ?f3 3) (= ?c3 9))))
+  =>
+  (modify ?h (estado asignado)))
 
 (defrule three-values-repeated-in-column
   ?h1<-(celda (fila ?f1) (columna ?c) (valor ?v) (estado desconocido))
@@ -537,7 +615,7 @@
 )
 
 (defrule avoid-isolated-cell-margin-up-3
-  (celda (fila ?f3) (columna ?c3) (estado eliminado))
+  (celda (fila ?f1) (columna ?c3) (estado eliminado))
   (celda (fila ?f1) (columna ?c1) (estado eliminado))
   (celda (fila ?f1) (columna ?c2) (estado asignado))
   ?h1<-(celda (fila ?f2) (columna ?c2) (estado desconocido))
@@ -617,7 +695,7 @@
   (celda (fila ?f1) (columna ?c2) (valor ?v2))
   (celda (fila ?f3) (columna ?c2) (valor ?v2) (estado ?e2))
   ?h1 <- (celda (fila ?f3) (columna ?c1) (estado ?e3))
-  (test (and (eq (abs(- ?f2 ?f3)) 1) (and (eq (abs(- ?c1 ?c2)) 1) (neq ?f1 ?f2))))
+  (test (and (= (abs(- ?f2 ?f3)) 1) (and (= (abs(- ?c1 ?c2)) 1) (!= ?f1 ?f2))))
   (test (or (eq ?e1 eliminado) (eq ?e2 eliminado)))
   (test (eq ?e3 desconocido))
     =>
@@ -631,7 +709,7 @@
   (celda (fila ?f2) (columna ?c1) (valor ?v2))
   (celda (fila ?f2) (columna ?c3) (valor ?v2) (estado ?e2))
   ?h1 <- (celda (fila ?f1) (columna ?c3) (estado ?e3))
-  (test (and (eq (abs(- ?c2 ?c3)) 1) (and (eq (abs(- ?f1 ?f2)) 1) (neq ?c1 ?c2))))
+  (test (and (= (abs(- ?c2 ?c3)) 1) (and (= (abs(- ?f1 ?f2)) 1) (!= ?c1 ?c2))))
   (test (or (eq ?e1 eliminado) (eq ?e2 eliminado)))
   (test (eq ?e3 desconocido))
     =>

@@ -279,6 +279,7 @@
   (modify ?h (estado asignado)))
 
 (defrule three-values-repeated-in-column
+(declare (salience 3))
   ?h1<-(celda (fila ?f1) (columna ?c) (valor ?v) (estado desconocido))
   ?h2<-(celda (fila ?f2) (columna ?c) (valor ?v) (estado desconocido))
   ?h3<-(celda (fila ?f3) (columna ?c) (valor ?v) (estado desconocido))
@@ -291,6 +292,7 @@
   (modify ?h3 (estado eliminado)))
 
 (defrule three-values-repeated-in-row
+(declare (salience 3))
   ?h1<-(celda (fila ?f) (columna ?c1) (valor ?v) (estado desconocido))
   ?h2<-(celda (fila ?f) (columna ?c2) (valor ?v) (estado desconocido))
   ?h3<-(celda (fila ?f) (columna ?c3) (valor ?v) (estado desconocido))
@@ -300,7 +302,8 @@
   (modify ?h2 (estado asignado))
   (modify ?h3 (estado eliminado))) 
 
-(defrule pair-induction-fila
+(defrule pair-induction-row
+(declare (salience 3))
   (celda (fila ?f) (columna ?c1) (valor ?v))
   (celda (fila ?f) (columna ?c2) (valor ?v))
   ?h<-(celda (fila ?f) (columna ?c3) (valor ?v) (estado desconocido))
@@ -308,7 +311,8 @@
   =>
   (modify ?h (estado eliminado))) 
   
-(defrule pair-induction-columna
+(defrule pair-induction-column
+(declare (salience 3))
   (celda (fila ?f1) (columna ?c) (valor ?v))
   (celda (fila ?f2) (columna ?c) (valor ?v))
   ?h<-(celda (fila ?f3) (columna ?c) (valor ?v) (estado desconocido))
@@ -352,22 +356,6 @@
   (modify ?h1 (estado asignado))
 )
 
-
-(defrule delete-same-row-value
-  (celda (fila ?f1) (columna ?c) (valor ?v) (estado asignado))
-  ?h1<-(celda (fila ?f2) (columna ?c) (valor ?v) (estado desconocido))
-  (test (neq ?f1 ?f2))
-    =>
-  (modify ?h1 (estado eliminado))
-)
-
-(defrule delete-same-column-value
-  (celda (fila ?f) (columna ?c1) (valor ?v) (estado asignado))
-  ?h1<-(celda (fila ?f) (columna ?c2) (valor ?v) (estado desconocido))
-  (test (neq ?c1 ?c2))
-    =>
-  (modify ?h1 (estado eliminado))
-)
 
 (defrule square-between-a-pair-row
   (celda (fila ?f) (columna ?c1) (valor ?v1))
@@ -668,6 +656,8 @@
   (test (neq ?c1 ?c2))
     =>
   (modify ?h (estado eliminado)))
+  
+
 
 ;(defrule corner-down-right-with-assigned-value
 ;  (declare (salience 20))

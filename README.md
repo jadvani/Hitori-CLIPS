@@ -1,5 +1,13 @@
 # Hitori Solver with CLIPS
 
-Hitori es uno de los pasatiempos lógicos popularizados por la revista japonesa [Nikoli](https://www.nikoli.co.jp/en/). El objetivo del juego consiste en, dada una cuadrícula con cifras, determinar cuales hay que quitar para conseguir que no haya elementos repetidos ni en las filas ni en las columnas. También hay otras restricciones sobre la forma en que se puede eliminar estos elementos y las veremos un poco más adelante.
+Hitori is a logic puzzle popularized by [Nikoli](https://www.nikoli.co.jp/en/). Hitori is played with a grid of squares or cells, with each cell initially containing a number. The game is played by eliminating squares/numbers and this is done by blacking them out. The objective is to transform the grid to a state wherein all three following rules are true:
 
-En concreto vamos a considerar cuadrículas de tamaño 9x9 con cifras del 1 al 9 como la siguiente:
+- no row or column can have more than one occurrence of any given number
+- black cells cannot be adjacent, although they can be diagonal to one another.
+- the remaining numbered cells must be all connected to each other, horizontally or vertically.
+
+Some of the specific rules and techniques implemented were found here:
+
+http://tectonicpuzzel.eu/hitori-solving-techniques.html
+
+https://www.conceptispuzzles.com/index.aspx?uri=puzzle/hitori/techniques
